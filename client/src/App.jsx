@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { 
   Search, MessageCircle, CheckCircle, Clock, User, LogOut, Menu, X, 
   ChevronRight, ChevronDown, Send, Shield, Heart, MoreHorizontal, LayoutDashboard,
-  Layers, Filter, Github, Twitter, Linkedin, ArrowLeft, Globe, Mail, Lock
+  Layers, Filter, Github, Twitter, Linkedin, Globe, Mail, Lock, ArrowLeft
 } from 'lucide-react';
 
 // --- Helper Functions ---
@@ -119,14 +119,14 @@ function LoginModal({ onClose, onClientLogin, onAdminLogin }) {
               <span>or</span>
             </div>
             
-            <button className="text-btn" onClick={() => setAdminMode(true)}>
+            <button className="btn text-only" onClick={() => setAdminMode(true)}>
               <Shield size={14} style={{marginRight:'4px'}}/> Admin Access
             </button>
           </div>
         ) : (
           <div className="admin-login-form">
             <div className="field">
-              <label>Admin Password</label>
+              <label>Admin Password <span style={{fontWeight:'normal', fontSize:'0.85em', color:'var(--text-muted)'}}>(Demo: admin123)</span></label>
               <div className="input-with-icon">
                 <Lock size={16} className="input-icon"/>
                 <input 
@@ -137,73 +137,10 @@ function LoginModal({ onClose, onClientLogin, onAdminLogin }) {
                 />
               </div>
             </div>
-            <button className="btn primary full-width" onClick={() => onAdminLogin(password)}>
+            <button className="btn primary full-width" onClick={() => onAdminLogin(password)} disabled={!password}>
               Access Dashboard
             </button>
-            <button className="text-btn" onClick={() => setAdminMode(false)}>
-              Back to User Login
-            </button>
-          </div>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function LoginPage({ onClientLogin, onAdminLogin }) {
-  const [adminMode, setAdminMode] = useState(false);
-  const [password, setPassword] = useState('');
-
-  return (
-    <div className="login-page-container">
-      <div className="login-card">
-        <div className="login-header">
-          <div className="logo-badge">
-            <MessageCircle size={24} color="white" />
-          </div>
-          <h1>ExpertAsk</h1>
-          <p>Login to ask questions or manage answers</p>
-        </div>
-
-        {!adminMode ? (
-          <div className="login-options-col">
-            <button className="login-btn guest" onClick={() => onClientLogin('anonymous', 'Guest User')}>
-              <User size={20} />
-              <span>Continue as Guest</span>
-            </button>
-            <button className="login-btn google" onClick={() => onClientLogin('google', 'Google User')}>
-              <Globe size={20} />
-              <span>Sign in with Google</span>
-            </button>
-            <button className="login-btn email" onClick={() => {
-                const email = prompt("Enter email:");
-                if(email) onClientLogin('email', email);
-              }}>
-              <Mail size={20} />
-              <span>Sign in with Email</span>
-            </button>
-            <button className="text-btn center" onClick={() => setAdminMode(true)}>
-              <Shield size={14} style={{marginRight:'6px'}}/> Admin Access
-            </button>
-          </div>
-        ) : (
-          <div className="admin-login-form">
-            <div className="field">
-              <label>Admin Password</label>
-              <div className="input-with-icon">
-                <Lock size={16} className="input-icon"/>
-                <input 
-                  type="password" 
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                />
-              </div>
-            </div>
-            <button className="btn primary full-width" onClick={() => onAdminLogin(password)}>
-              Access Dashboard
-            </button>
-            <button className="text-btn center" onClick={() => setAdminMode(false)}>
+            <button className="btn text-only" onClick={() => setAdminMode(false)}>
               Back to User Login
             </button>
           </div>
@@ -385,7 +322,7 @@ function AskQuestionPage({ programs, onCancel, onSubmit }) {
   );
 }
 
-function AdminDashboard({ programs, questions, onCreateProgram, onAnswerQuestion }) {
+function AdminDashboard({ programs, questions, onCreateProgram, onAnswerQuestion, onToggleProgramStatus }) {
   const [activeTab, setActiveTab] = useState('questions'); 
   const [answerDraft, setAnswerDraft] = useState('');
   const [selectedQuestionId, setSelectedQuestionId] = useState(null);
@@ -394,7 +331,6 @@ function AdminDashboard({ programs, questions, onCreateProgram, onAnswerQuestion
   // Stats
   const totalQ = questions.length;
   const unansweredQ = questions.filter(q => !q.answer).length;
-  const answeredQ = totalQ - unansweredQ;
   const pendingQuestions = questions.filter(q => !q.answer);
 
   return (
@@ -409,13 +345,6 @@ function AdminDashboard({ programs, questions, onCreateProgram, onAnswerQuestion
           <div>
             <div className="stat-value">{totalQ}</div>
             <div className="stat-label">Total Questions</div>
-          </div>
-        </div>
-        <div className="stat-card success">
-          <div className="stat-icon"><CheckCircle size={24} /></div>
-          <div>
-            <div className="stat-value">{answeredQ}</div>
-            <div className="stat-label">Answered</div>
           </div>
         </div>
         <div className="stat-card warning">
@@ -581,16 +510,26 @@ function HomePage({ programs, questions, onQuestionClick, onAskClick, filter }) 
     <div>
       <div className="hero-section">
         <div className="hero-content">
-          <h1>Get Expert Answers<br/>to Your Questions</h1>
+          <h1>Get Expert Answers to Your Questions</h1>
           <p>A community platform where industry leaders provide authoritative responses to your most pressing inquiries.</p>
           <div className="hero-actions">
             <button className="btn primary large" onClick={onAskClick}>
               Ask a Question <ChevronRight size={20} />
             </button>
+            <div className="hero-stats">
+              <div className="h-stat">
+                <strong>{questions.filter(q=>q.answer).length}</strong>
+                <span>Answered</span>
+              </div>
+              <div className="h-stat">
+                <strong>{questions.length}</strong>
+                <span>Questions</span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="hero-image">
-           <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team" />
+           <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Team" loading="lazy" />
         </div>
       </div>
 
@@ -622,7 +561,7 @@ function HomePage({ programs, questions, onQuestionClick, onAskClick, filter }) 
           <div className="empty-state">
             <div className="empty-icon"><Search size={48} /></div>
             <h3>No questions found</h3>
-            <p>Try adjusting your filters or ask a new question.</p>
+            <p>Try adjusting your filters or be the first to ask a new question!</p>
           </div>
         )}
       </div>
@@ -634,15 +573,16 @@ function HomePage({ programs, questions, onQuestionClick, onAskClick, filter }) 
 
 function App() {
   const [user, setUser] = useState(null); 
-  const [view, setView] = useState('login'); // login, home, ask, detail, admin
+  const [view, setView] = useState('home'); // home, ask, detail, admin
   const [targetView, setTargetView] = useState(null);
   const [selectedQuestion, setSelectedQuestion] = useState(null);
+  const [showLogin, setShowLogin] = useState(false);
 
   // Data State
   const [programs, setPrograms] = useState([
     { id: 1, name: "UI/UX Design", isOpen: true },
     { id: 2, name: "Web Development", isOpen: true },
-    { id: 3, name: "Career Advice", isOpen: false }
+    { id: 3, name: "Career Advice", isOpen: true }
   ]);
   
   const [questions, setQuestions] = useState([
@@ -659,19 +599,14 @@ function App() {
   // Actions
   const handleClientLogin = (method, name) => {
     setUser({ role: 'client', method, name });
-    if (targetView) {
-      setView(targetView);
-      setTargetView(null);
-    } else {
-      setView('home');
-    }
+    setShowLogin(false);
   };
 
   const handleAdminLogin = (password) => {
     if (password === 'admin123') {
       setUser({ role: 'admin', name: 'Administrator' });
+      setShowLogin(false);
       setView('admin');
-      setTargetView(null);
     } else {
       alert('Incorrect Password');
     }
@@ -679,8 +614,8 @@ function App() {
 
   const handleAskSubmit = (data) => {
     if (!user) {
-      setTargetView('ask');
-      setView('login');
+      alert("Please login to submit");
+      setShowLogin(true);
       return;
     }
     const newQ = {
@@ -701,18 +636,12 @@ function App() {
       <div className="page-content">
         <NavBar 
           user={user} 
-          onLogout={() => { setUser(null); setView('login'); }} 
-          onLoginClick={() => setView('login')} 
+          onLogout={() => { setUser(null); setView('home'); }} 
+          onLoginClick={() => setShowLogin(true)} 
         />
 
         <main>
-          {view === 'login' && (
-            <LoginPage 
-              onClientLogin={handleClientLogin}
-              onAdminLogin={handleAdminLogin}
-            />
-          )}
-          {user?.role === 'admin' && view !== 'login' ? (
+          {user?.role === 'admin' ? (
             <AdminDashboard 
               programs={programs}
               questions={questions}
@@ -726,30 +655,26 @@ function App() {
             />
           ) : (
             <>
-              {view === 'home' && user && (
+              {view === 'home' && (
                 <HomePage 
                   programs={programs} 
                   questions={questions}
                   onQuestionClick={(q) => { setSelectedQuestion(q); setView('detail'); }}
                   onAskClick={() => {
-                    if(!user) {
-                      setTargetView('ask');
-                      setView('login');
-                    } else {
-                      setView('ask');
-                    }
+                    if(!user) setShowLogin(true);
+                    else setView('ask');
                   }}
                   filter={null}
                 />
               )}
-              {view === 'ask' && user && (
+              {view === 'ask' && (
                 <AskQuestionPage 
                   programs={programs}
                   onCancel={() => setView('home')}
                   onSubmit={handleAskSubmit}
                 />
               )}
-              {view === 'detail' && user && (
+              {view === 'detail' && (
                 <QuestionDetail 
                   question={selectedQuestion}
                   programName={programs.find(p => p.id === selectedQuestion?.programId)?.name}
@@ -762,6 +687,14 @@ function App() {
       </div>
 
       <Footer />
+
+      {showLogin && (
+        <LoginModal 
+          onClose={() => setShowLogin(false)}
+          onClientLogin={handleClientLogin}
+          onAdminLogin={handleAdminLogin}
+        />
+      )}
     </div>
   );
 }
