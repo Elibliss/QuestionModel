@@ -1047,3 +1047,170 @@ button, input, textarea, select {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  /* Layout Adjustments */
+  .page {
+    padding: 0 16px 40px;
+  }
+  
+  /* Navigation */
+  .nav-bar {
+    padding: 16px 0;
+  }
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  .nav-actions {
+    gap: 8px;
+  }
+  .user-pill {
+    padding: 4px 10px 4px 8px;
+  }
+  .user-pill span {
+    display: none; /* Hide username on mobile to save space */
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    grid-template-columns: 1fr;
+    padding: 32px 24px;
+    gap: 40px;
+    text-align: center;
+    border-radius: var(--radius-lg);
+  }
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+  .hero-content p {
+    font-size: 1.1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero-image {
+    display: none; /* Hide hero image on mobile */
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 32px;
+  }
+  .hero-stats {
+    border-left: none;
+    border-top: 1px solid var(--border);
+    padding-left: 0;
+    padding-top: 24px;
+    width: 100%;
+    justify-content: center;
+  }
+  .btn.large {
+    width: 100%;
+  }
+
+  /* Feed & Filters */
+  .feed-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .filter-pills {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .pill {
+    white-space: nowrap;
+    padding: 8px 16px;
+  }
+
+  /* Question Cards */
+  .question-card {
+    padding: 20px;
+  }
+  .q-header {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .status-badge {
+    align-self: flex-start;
+  }
+  
+  /* Detail View */
+  .detail-card {
+    padding: 24px;
+  }
+  .detail-header-row {
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+  }
+  .user-profile.large {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .detail-title {
+    font-size: 1.5rem;
+  }
+  .detail-meta-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .status-badge.large {
+    align-self: flex-start;
+  }
+  .answer-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  .answer-content {
+    padding: 20px;
+  }
+
+  /* Admin Dashboard */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  .admin-split-view {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar-list {
+    max-height: 300px;
+  }
+  .main-editor {
+    min-height: 500px;
+  }
+  .admin-header h1 {
+    font-size: 1.5rem;
+  }
+  .topic-list {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Footer */
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+  .footer-logo {
+    justify-content: center;
+  }
+  .app-footer {
+    padding: 60px 24px 32px;
+  }
+  
+  /* Modals */
+  .modal-card {
+    margin: 16px;
+    padding: 24px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+}
