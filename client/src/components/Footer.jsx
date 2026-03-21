@@ -1,5 +1,5 @@
 import React from 'react';
-import { Twitter, Linkedin, Mail } from 'lucide-react';
+import { Twitter, Linkedin, Mail, Facebook, Youtube } from 'lucide-react';
 import Logo from "../assets/logo east-Photoroom.png"
 
 function Footer() {
@@ -31,8 +31,8 @@ function Footer() {
         <div className="footer-col">
           <h4 style={{ color: 'var(--accent)', marginBottom: '20px' }}>Connect</h4>
           <div className="social-links" style={{ display: 'flex', gap: '15px' }}>
-            <a href="#" style={{ color: 'white' }}><Twitter size={24} /></a>
-            <a href="#" style={{ color: 'white' }}><Linkedin size={24} /></a>
+            <a href="https://web.facebook.com/EastMandateglobal" style={{ color: 'white' }}><Facebook size={24} /></a>
+            <a href="https://www.youtube.com/@EASTMANDATEGLOBAL" style={{ color: 'white' }}><Youtube size={24} /></a>
             <a href="#" style={{ color: 'white' }}><Mail size={24} /></a>
           </div>
         </div>

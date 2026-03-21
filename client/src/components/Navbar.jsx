@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from "../assets/logo east-Photoroom.png"
-import { MessageCircle, User, LogOut, Menu, X } from 'lucide-react';
+import { MessageCircle, User, Menu, X } from 'lucide-react';
 
 function NavBar({ user, onLogout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,8 +19,17 @@ function NavBar({ user, onLogout }) {
         </Link>
       </div>
       
-      <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer' }}>
-        {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+      <div className="nav-actions" style={{ marginLeft: 'auto' }}>
+        {user && (
+          <div className="user-pill" style={{ padding: '4px 12px', fontSize: '0.8rem' }}>
+            <User size={14} />
+            <span>{user.name}</span>
+          </div>
+        )}
+      </div>
+
+      <button className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} style={{ display: 'none', background: 'none', border: 'none', color: 'var(--primary)', cursor: 'pointer', padding: '4px' }}>
+        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
       <div className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
@@ -31,25 +40,19 @@ function NavBar({ user, onLogout }) {
         <Link to="/ask" className="nav-link" onClick={() => setIsMenuOpen(false)}>Ask Question</Link>
       </div>
 
-      <div className="nav-actions">
-        {user ? (
-          <>
-            <div className="user-pill">
-              <User size={16} />
-              <span>{user.name}</span>
-            </div>
-            <button className="btn icon-btn" onClick={onLogout} title="Logout" style={{color:'var(--danger)', background:'var(--danger-bg)'}}>
-              <LogOut size={20} />
-            </button>
-          </>
-        ) : (
-          <div style={{ width: '40px' }}></div>
-        )}
-      </div>
-
       <style>{`
         @media (max-width: 768px) {
-          .menu-toggle { display: block !important; }
+          .menu-toggle { 
+            display: block !important; 
+            order: 3;
+          }
+          .nav-logo { order: 1; }
+          .nav-actions { 
+            display: flex !important; 
+            order: 2;
+            margin-left: auto !important;
+            margin-right: 12px;
+          }
           .nav-links {
             display: ${isMenuOpen ? 'flex' : 'none'} !important;
             position: absolute;
@@ -63,7 +66,7 @@ function NavBar({ user, onLogout }) {
             border-bottom: 1px solid var(--border);
             z-index: 100;
           }
-          .nav-actions { display: ${isMenuOpen ? 'none' : 'flex'}; }
+          .logo-text { font-size: 1.1rem !important; }
         }
       `}</style>
     </nav>

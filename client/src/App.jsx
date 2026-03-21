@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate } from 'react-router-dom';
+import { useState, useEffect, useMemo } from 'react';
+import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, useLocation } from 'react-router-dom';
 import { X } from 'lucide-react';
 
 // Components
@@ -16,11 +16,13 @@ import { QuestionModelPage } from './pages/QuestionModelPage';
 import { AskQuestionPage } from './pages/AskQuestionPage';
 import { QuestionDetail } from './pages/QuestionDetail';
 import { AdminDashboard } from './pages/AdminDashboard';
+import { EventRegistrationPage } from './pages/EventRegistrationPage';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
 function AppContent() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(() => {
     const saved = localStorage.getItem('emg_user');
     return saved ? JSON.parse(saved) : null;
@@ -29,6 +31,45 @@ function AppContent() {
   const [showRegistration, setShowRegistration] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  // Admin managed events and registrations
+  const [managedEvents, setManagedEvents] = useState(() => {
+    const saved = localStorage.getItem('emg_managed_events');
+    return saved ? JSON.parse(saved) : [
+      { id: '1', title: 'Global Word Festival', date: '2026-04-15', description: 'Annual spiritual gathering for believers.', location: 'Enugu, Nigeria' }
+    ];
+  });
+
+  const [eventRegistrations, setEventRegistrations] = useState(() => {
+    const saved = localStorage.getItem('emg_event_registrations');
+    return saved ? JSON.parse(saved) : [
+      { id: 1, eventId: '1', name: "Alice", number: "08012345678", school: "University of Lagos", isUndergraduate: "yes", gender: "female", registeredAt: "2026-03-10T10:00:00Z" },
+      { id: 2, eventId: '1', name: "Bob", number: "08098765432", school: "University of Lagos", isUndergraduate: "yes", gender: "male", registeredAt: "2026-03-11T09:00:00Z" }
+    ];
+  });
+
+  // Track events and registrations in localStorage
+  useEffect(() => {
+    localStorage.setItem('emg_managed_events', JSON.stringify(managedEvents));
+  }, [managedEvents]);
+
+  useEffect(() => {
+    localStorage.setItem('emg_event_registrations', JSON.stringify(eventRegistrations));
+  }, [eventRegistrations]);
+
+  const isAdminPage = location.pathname.startsWith('/admin');
+  const isEventRegPage = location.pathname.startsWith('/register-event');
+  const hideLayout = isAdminPage || isEventRegPage;
+
+  // Registration for Questions (Question Model Only)
+  const [questionModelUsers, setQuestionModelUsers] = useState(() => {
+    const saved = localStorage.getItem('emg_qm_users');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem('emg_qm_users', JSON.stringify(questionModelUsers));
+  }, [questionModelUsers]);
 
   // Data State (Mock data for demo)
   const [programs, setPrograms] = useState([
@@ -57,12 +98,24 @@ function AppContent() {
     return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  const handleRegister = (data) => {
-    const newUser = { ...data, role: 'user' };
+  const handleRegisterForQM = (data) => {
+    const newUser = { ...data, role: 'user', id: Date.now() };
     setUser(newUser);
     localStorage.setItem('emg_user', JSON.stringify(newUser));
+    setQuestionModelUsers(prev => [...prev, { ...newUser, registeredAt: new Date().toISOString() }]);
     setShowRegistration(false);
     navigate('/ask');
+  };
+
+  const handleEventRegister = (eventId, userData) => {
+    const newReg = {
+      ...userData,
+      id: Date.now(),
+      eventId,
+      registeredAt: new Date().toISOString()
+    };
+    setEventRegistrations(prev => [...prev, newReg]);
+    alert('Registration successful!');
   };
 
   const handleAdminLogin = (password) => {
@@ -100,10 +153,12 @@ function AppContent() {
   return (
     <div className="page-container">
       <div className="page-content">
-        <NavBar 
-          user={user} 
-          onLogout={() => setShowLogoutConfirm(true)} 
-        />
+        {!hideLayout && (
+          <NavBar 
+            user={user} 
+            onLogout={() => setShowLogoutConfirm(true)} 
+          />
+        )}
 
         <main>
           <Routes>
@@ -111,6 +166,12 @@ function AppContent() {
             <Route path="/events" element={<EventPage />} />
             <Route path="/branches" element={<BranchesPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/register-event/:eventId" element={
+              <EventRegistrationPage 
+                events={managedEvents}
+                onRegister={handleEventRegister}
+              />
+            } />
             <Route path="/ask" element={
               <QuestionModelPage 
                 programs={programs} 
@@ -143,6 +204,11 @@ function AppContent() {
                 <AdminDashboard 
                   programs={programs}
                   questions={questions}
+                  events={managedEvents}
+                  registrations={eventRegistrations}
+                  onLogout={handleLogout}
+                  onCreateEvent={(ev) => setManagedEvents([...managedEvents, { ...ev, id: Date.now().toString() }])}
+                  onDeleteEvent={(id) => setManagedEvents(managedEvents.filter(e => e.id !== id))}
                   onCreateProgram={(p) => setPrograms([...programs, { ...p, id: Date.now(), isOpen: true }])}
                   onToggleProgramStatus={(id) => {
                     setPrograms(programs.map(p => p.id === id ? { ...p, isOpen: !p.isOpen } : p));
@@ -157,12 +223,12 @@ function AppContent() {
         </main>
       </div>
 
-      <Footer />
+      {!hideLayout && <Footer />}
 
       {showRegistration && (
         <UserRegistrationModal 
           onClose={() => setShowRegistration(false)}
-          onRegister={handleRegister}
+          onRegister={handleRegisterForQM}
         />
       )}
 

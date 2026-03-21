@@ -6,7 +6,8 @@ export function UserRegistrationModal({ onClose, onRegister }) {
     name: '',
     number: '',
     school: '',
-    isUndergraduate: 'yes'
+    isUndergraduate: 'yes',
+    gender: 'male'
   });
   const [error, setError] = useState(null);
 
@@ -48,6 +49,22 @@ export function UserRegistrationModal({ onClose, onRegister }) {
                 placeholder="Enter your name"
                 required
               />
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Gender</label>
+            <div className="input-with-icon">
+              <User size={18} style={{ opacity: 0.5, marginRight: '10px' }} />
+              <select 
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                style={{ width: '100%', border: 'none', outline: 'none', background: 'transparent' }}
+              >
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
             </div>
           </div>
 

@@ -1,41 +1,45 @@
 import React from 'react';
 import { Calendar, MapPin, Clock } from 'lucide-react';
+import rosh from "../assets/rosh.jpg";
+import meal from "../assets/meal.jpg";
+import tongs from "../assets/tongs.jpg";
+import GYC from "../assets/GYC.jpg";
 
 const events = [
   {
     id: 1,
-    title: "Global Worship Experience",
+    title: "Rosh Hashanah 2026",
     date: "March 15, 2026",
     time: "5:00 PM",
-    location: "Lagos, Nigeria",
-    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description: "A night of intense worship and spiritual awakening with believers from all over the world."
+    location: "Enugu, Nigeria",
+    image: rosh,
+    description: "Days of intense worship and spiritual awakening with believers from all over the world."
   },
   {
     id: 2,
-    title: "Leadership Summit 2026",
+    title: "Meal of Coronation 2026",
     date: "February 20, 2026",
     time: "10:00 AM",
-    location: "London, UK",
-    image: "https://images.unsplash.com/photo-1475721027187-402ad2989a3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    description: "Empowering the next generation of leaders with divine wisdom and practical skills."
+    location: "Nigeria, Enugu",
+    image: meal,
+    description: "Eating the meal of the Spirit with Wisdom, Knowledge and Understanding."
   },
   {
     id: 3,
     title: "Community Outreach Program",
     date: "January 10, 2026",
     time: "9:00 AM",
-    location: "Houston, Texas",
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    location: "Nigeria, Enugu",
+    image: tongs,
     description: "Spreading love and hope through practical support and the word of God in our local communities."
   },
   {
     id: 4,
-    title: "Youth Fire Conference",
-    date: "December 15, 2025",
+    title: "Global Youth Conference",
+    date: "August 15, 2025",
     time: "4:00 PM",
-    location: "Accra, Ghana",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    location: "Enugu, Nigeria",
+    image: GYC,
     description: "Igniting the passion for Christ in the hearts of young people across the continent."
   }
 ];

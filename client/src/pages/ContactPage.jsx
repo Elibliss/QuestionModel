@@ -63,7 +63,7 @@ export function ContactPage() {
                 </div>
                 <div>
                   <p style={{ margin: 0, opacity: 0.6, fontSize: '0.9rem' }}>Our Head Office</p>
-                  <p style={{ margin: 0, fontWeight: '600', fontSize: 'clamp(0.9rem, 3vw, 1rem)' }}>123 Mandate Way, VI, Lagos</p>
+                  <p style={{ margin: 0, fontWeight: '600', fontSize: 'clamp(0.9rem, 3vw, 1rem)' }}>Plot 23 Liberty Estate Phase 1, Enugu</p>
                 </div>
               </div>
             </div>
