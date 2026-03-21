@@ -3,14 +3,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const url = process.env.DATABASE_URL;
+const sslRequired = (process.env.DB_SSL === 'true') || /sslmode=require/i.test(url || '') || process.env.NODE_ENV === 'production';
+
+const sequelize = new Sequelize(url, {
   dialect: 'postgres',
   logging: false, 
   dialectOptions: {
-    ssl: process.env.NODE_ENV === 'production' ? {
-      require: true,
-      rejectUnauthorized: false
-    } : false
+    ssl: sslRequired ? { require: true, rejectUnauthorized: false } : false
   }
 });
 

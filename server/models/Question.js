@@ -7,6 +7,10 @@ const Question = sequelize.define('Question', {
     autoIncrement: true,
     primaryKey: true
   },
+  companyId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   title: {
     type: DataTypes.STRING,
     allowNull: false

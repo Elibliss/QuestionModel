@@ -11,6 +11,21 @@ const Company = sequelize.define('Company', {
     type: DataTypes.STRING,
     allowNull: false
   },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    validate: { isEmail: true }
+  },
+  contact: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    comment: 'Contact phone or details'
+  },
+  passwordHash: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   slug: {
     type: DataTypes.STRING,
     allowNull: false,

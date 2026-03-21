@@ -1,24 +1,19 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-const Program = sequelize.define('Program', {
+const Hashtag = sequelize.define('Hashtag', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
   },
-  companyId: {
-    type: DataTypes.INTEGER,
-    allowNull: false
-  },
-  name: {
+  code: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    unique: true,
+    comment: 'Company access code provided to users'
   },
-  description: {
-    type: DataTypes.TEXT
-  },
-  isOpen: {
+  isActive: {
     type: DataTypes.BOOLEAN,
     defaultValue: true
   }
@@ -26,4 +21,4 @@ const Program = sequelize.define('Program', {
   timestamps: true
 });
 
-export { Program };
+export { Hashtag };
