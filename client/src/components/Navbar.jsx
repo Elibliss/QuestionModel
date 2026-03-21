@@ -21,7 +21,7 @@ function NavBar({ user, onLogout }) {
       
       <div className="nav-actions" style={{ marginLeft: 'auto' }}>
         {user && (
-          <div className="user-pill" style={{ padding: '4px 12px', fontSize: '0.8rem' }}>
+          <div className="user-pill" style={{ padding: '4px 12px', marginRight: '12px', fontSize: '0.8rem' }}>
             <User size={14} />
             <span>{user.name}</span>
           </div>

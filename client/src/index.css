@@ -190,7 +190,7 @@ button, input, textarea, select {
 
 .nav-links {
   display: flex;
-  gap: 48px;
+  gap: 24px;
   align-items: center;
 }
 
@@ -201,7 +201,8 @@ button, input, textarea, select {
   font-size: 1.05rem;
   transition: var(--transition);
   position: relative;
-  padding: 8px 0;
+  padding: 8px 16px;
+  border-radius: 8px;
 }
 
 .nav-link:hover {
@@ -357,7 +358,7 @@ button, input, textarea, select {
 .h-stat strong {
   font-size: 1.75rem;
   font-weight: 800;
-  color: var(--text-main);
+  color: var(--text-muted);
   line-height: 1;
   margin-bottom: 4px;
 }
@@ -739,16 +740,17 @@ button, input, textarea, select {
 }
 
 .official-answer-box {
-  background: linear-gradient(to bottom right, #f8fafc, #eff6ff);
-  border: 1px solid var(--primary-soft);
+  background: var(--primary);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: var(--radius-lg);
   overflow: hidden;
+  color: white;
 }
 
 .answer-header {
   padding: 20px 30px;
-  background: white;
-  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   display: flex;
   align-items: center;
 }
@@ -775,14 +777,14 @@ button, input, textarea, select {
   flex-direction: column;
 }
 
-.admin-info strong { font-size: 1.1rem; color: var(--text-main); }
-.admin-info span { font-size: 0.85rem; color: var(--text-muted); }
+.admin-info strong { font-size: 1.1rem; color: var(--accent); }
+.admin-info span { font-size: 0.85rem; color: rgba(255,255,255,0.7); }
 
 .answer-content {
   padding: 40px;
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--text-main);
+  color: white;
 }
 
 /* --- Admin Dashboard --- */

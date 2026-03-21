@@ -52,19 +52,19 @@ export function QuestionDetail({ question, programName, onBack }) {
         </div>
 
         {question.answer && (
-          <div className="official-answer-box" style={{ background: 'var(--primary)', color: 'white', padding: '40px', borderRadius: 'var(--radius-lg)' }}>
-            <div className="answer-header" style={{ marginBottom: '24px' }}>
-              <div className="admin-profile" style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <div className="verified-badge" style={{ background: 'var(--accent)', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Shield size={20} color="var(--primary)"/>
+          <div className="official-answer-box">
+            <div className="answer-header">
+              <div className="admin-profile">
+                <div className="verified-badge">
+                  <Shield size={20} color="white"/>
                 </div>
-                <div className="admin-info" style={{ display: 'flex', flexDirection: 'column' }}>
-                  <strong style={{ fontSize: '1.1rem', color: 'var(--accent)' }}>Official Response</strong>
-                  <span style={{ fontSize: '0.85rem', opacity: '0.8' }}>Verified Admin • {formatDateTime(question.answeredAt)}</span>
+                <div className="admin-info">
+                  <strong>Official Response</strong>
+                  <span>Verified Admin • {formatDateTime(question.answeredAt)}</span>
                 </div>
               </div>
             </div>
-            <div className="answer-content" style={{ fontSize: '1.1rem', lineHeight: '1.8', whiteSpace: 'pre-wrap' }}>
+            <div className="answer-content" style={{ whiteSpace: 'pre-wrap' }}>
               {question.answer}
             </div>
           </div>
