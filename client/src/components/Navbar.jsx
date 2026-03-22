@@ -14,7 +14,7 @@ function NavBar({ user, onLogout }) {
             <img src={Logo} alt="East Mandate" style={{ width: '40px', height: '40px' }} />
           </div>
           <span className="logo-text" style={{ fontWeight: '800', fontSize: 'clamp(1.2rem, 4vw, 1.5rem)', color: 'var(--primary)' }}>
-            East Mandate
+            East Mandate Global
           </span>
         </Link>
       </div>
