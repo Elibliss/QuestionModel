@@ -261,10 +261,32 @@ export function AdminDashboard({
                 {selectedQuestionId ? (
                   <div className="card" style={{ padding: '40px' }}>
                     <div style={{ background: '#f8fafc', padding: '30px', borderRadius: '16px', marginBottom: '30px', border: '1px solid #e2e8f0' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: 'var(--primary)', fontWeight: '800' }}>
-                        <MessageCircle size={18} /> INQUIRY
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--primary)', fontWeight: '800' }}>
+                          <MessageCircle size={18} /> INQUIRY
+                        </div>
+                        <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                          <strong>{questions.find(q => q.id === selectedQuestionId)?.authorName}</strong> • {new Date(questions.find(q => q.id === selectedQuestionId)?.createdAt).toLocaleDateString()}
+                        </div>
                       </div>
-                      <p style={{ fontSize: '1.15rem', lineHeight: '1.7', color: 'var(--text-main)', margin: 0 }}>{questions.find(q => q.id === selectedQuestionId)?.text}</p>
+                      
+                      <h3 style={{ fontSize: '1.4rem', color: 'var(--primary)', marginBottom: '16px', marginTop: 0 }}>
+                        {questions.find(q => q.id === selectedQuestionId)?.title}
+                      </h3>
+                      
+                      <p style={{ 
+                        fontSize: '1.1rem', 
+                        lineHeight: '1.7', 
+                        color: 'var(--text-main)', 
+                        margin: 0,
+                        whiteSpace: 'pre-wrap',
+                        background: 'white',
+                        padding: '20px',
+                        borderRadius: '12px',
+                        border: '1px solid #eef2f6'
+                      }}>
+                        {questions.find(q => q.id === selectedQuestionId)?.text || <span style={{ fontStyle: 'italic', opacity: 0.5 }}>No additional details provided.</span>}
+                      </p>
                     </div>
                     <textarea 
                       rows="10"

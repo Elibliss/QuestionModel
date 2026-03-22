@@ -38,7 +38,7 @@ export function HomePage() {
               EAST MANDATE GLOBAL
             </span>
             <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: '800', lineHeight: '1.1', marginBottom: '24px', color: 'white' }}>
-              Transforming Lives, <span style={{ color: 'var(--accent)' }}>One Soul</span> At A Time
+              The House of <span style={{ color: 'var(--accent)' }}>Wisdom,</span>Knowledege and Understanding
             </h1>
             <p className="hero-subtitle" style={{ fontSize: 'clamp(1rem, 4vw, 1.25rem)', opacity: '0.9', marginBottom: '40px', lineHeight: '1.7' }}>
               Welcome to East Mandate Global. We are a community dedicated to spiritual growth, 
