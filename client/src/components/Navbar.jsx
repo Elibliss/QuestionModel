@@ -35,6 +35,7 @@ function NavBar({ user, onLogout }) {
       <div className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
         <Link to="/" className="nav-link" onClick={() => setIsMenuOpen(false)}>Home</Link>
         <Link to="/events" className="nav-link" onClick={() => setIsMenuOpen(false)}>Events</Link>
+        <Link to="/messages" className="nav-link" onClick={() => setIsMenuOpen(false)}>Messages</Link>
         <Link to="/branches" className="nav-link" onClick={() => setIsMenuOpen(false)}>Branches</Link>
         <Link to="/contact" className="nav-link" onClick={() => setIsMenuOpen(false)}>Contact</Link>
         <Link to="/ask" className="nav-link" onClick={() => setIsMenuOpen(false)}>Ask Question</Link>

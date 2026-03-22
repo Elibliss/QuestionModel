@@ -1,8 +1,9 @@
 import React from 'react';
-import { ChevronRight, Users, Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { ChevronRight, Users, Calendar, MapPin, ArrowRight, Play, ExternalLink } from 'lucide-react';
 import mandate from "../assets/mandate.jpg"
 import papa from "../assets/papa.jpg"
 import Logo from "../assets/logo east-Photoroom.png"
+import JewishCalendarImg from "../assets/jewish calender.gif"
 import { Link } from 'react-router-dom';
 
 export function HomePage() {
@@ -37,7 +38,7 @@ export function HomePage() {
               EAST MANDATE GLOBAL
             </span>
             <h1 className="hero-title" style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: '800', lineHeight: '1.1', marginBottom: '24px', color: 'white' }}>
-              A house of <span style={{ color: 'var(--accent)' }}> Wisdom</span> Knowledge and Understanding
+              Transforming Lives, <span style={{ color: 'var(--accent)' }}>One Soul</span> At A Time
             </h1>
             <p className="hero-subtitle" style={{ fontSize: 'clamp(1rem, 4vw, 1.25rem)', opacity: '0.9', marginBottom: '40px', lineHeight: '1.7' }}>
               Welcome to East Mandate Global. We are a community dedicated to spiritual growth, 
@@ -49,6 +50,98 @@ export function HomePage() {
               </Link>
               <Link to="/events" className="btn secondary large" style={{ background: 'rgba(255,255,255,0.1)', color: 'white', border: '1px solid rgba(255,255,255,0.2)' }}>
                 View Events
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Jewish Calendar Section */}
+      <section className="page" style={{ marginBottom: '100px' }}>
+        <div className="card" style={{ padding: '60px', background: 'var(--primary)', color: 'white', position: 'relative', overflow: 'hidden' }}>
+          <div style={{ position: 'absolute', top: '-20%', right: '-10%', width: '400px', height: '400px', background: 'var(--accent)', opacity: '0.05', borderRadius: '50%' }}></div>
+          <div style={{ position: 'relative', zIndex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
+            <div>
+              <h2 style={{ fontSize: '2.5rem', color: 'var(--accent)', marginBottom: '24px' }}>The Jewish Calendar</h2>
+              <p style={{ fontSize: '1.1rem', lineHeight: '1.8', opacity: '0.9', marginBottom: '30px' }}>
+                At East Mandate Global, we align our spiritual rhythm with God's appointed times. 
+                Understanding the Jewish calendar helps us enter into the prophetic significance of each season, 
+                from New Moons to the Great Festivals.
+              </p>
+              <a href="https://youtu.be/dli121rnKrU?si=Ja_nZQH72BAonR8Z" target="_blank" rel="noreferrer" className="btn secondary" style={{ display: 'inline-flex', gap: '10px', alignItems: 'center', borderColor: 'var(--accent)', color: 'var(--accent)' }}>
+                View Current Season <ExternalLink size={18} />
+              </a>
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 'var(--radius-lg)', border: '1px solid rgba(255,255,255,0.1)', overflow: 'hidden' }}>
+              <img 
+                src={JewishCalendarImg} 
+                alt="Jewish Calendar" 
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              />
+              <div style={{ padding: '20px', textAlign: 'center' }}>
+                <p style={{ fontStyle: 'italic', opacity: '0.7', fontSize: '0.9rem' }}>"Teach us to number our days, that we may gain a heart of wisdom." - Psalm 90:12</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Messages (YouTube Sections) */}
+      <section className="page" style={{ marginBottom: '100px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+          <h2 style={{ fontSize: '3rem', color: 'var(--primary)' }}>Featured Teachings</h2>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>Experience the power of the word through our curated video messages.</p>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
+          {/* Video 1 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '50px', alignItems: 'center' }}>
+            <div className="video-container" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', aspectRatio: '16/9' }}>
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/dli121rnKrU" 
+                title="Message 1" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+              ></iframe>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '20px' }}>The Will and the Wheels of God</h3>
+              <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '30px' }}>
+                Deep dive into the prophetic mechanics of God's timing and how to position yourself 
+                within the movement of His divine wheels.
+              </p>
+              <Link to="/messages" className="btn primary" style={{ display: 'inline-flex', gap: '10px', alignItems: 'center' }}>
+                Watch More <Play size={18} />
+              </Link>
+            </div>
+          </div>
+
+          {/* Video 2 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '50px', alignItems: 'center' }}>
+            <div style={{ order: window.innerWidth > 768 ? 2 : 1 }}>
+              <div className="video-container" style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-lg)', aspectRatio: '16/9' }}>
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  src="https://www.youtube.com/embed/9Wdg56yrbfE" 
+                  title="Message 2" 
+                  frameBorder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                  allowFullScreen
+                ></iframe>
+              </div>
+            </div>
+            <div style={{ order: window.innerWidth > 768 ? 1 : 2 }}>
+              <h3 style={{ fontSize: '2rem', color: 'var(--primary)', marginBottom: '20px' }}>Living in the Eden Experience</h3>
+              <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: '1.8', marginBottom: '30px' }}>
+                Discover the original plan of God for mankind: a life of intimacy, dominion, 
+                and abundance in His presence.
+              </p>
+              <Link to="/messages" className="btn primary" style={{ display: 'inline-flex', gap: '10px', alignItems: 'center' }}>
+                Watch More <Play size={18} />
               </Link>
             </div>
           </div>

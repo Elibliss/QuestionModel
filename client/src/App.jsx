@@ -17,6 +17,7 @@ import { AskQuestionPage } from './pages/AskQuestionPage';
 import { QuestionDetail } from './pages/QuestionDetail';
 import { AdminDashboard } from './pages/AdminDashboard';
 import { EventRegistrationPage } from './pages/EventRegistrationPage';
+import { MessagesPage } from './pages/MessagesPage';
 
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
 
@@ -166,6 +167,7 @@ function AppContent() {
             <Route path="/events" element={<EventPage />} />
             <Route path="/branches" element={<BranchesPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/messages" element={<MessagesPage />} />
             <Route path="/register-event/:eventId" element={
               <EventRegistrationPage 
                 events={managedEvents}
